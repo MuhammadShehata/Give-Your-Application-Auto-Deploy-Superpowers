@@ -60,40 +60,40 @@ jobs:
       - run:
           name: Back-end build
           command: |
-             cd backend
-             npm install
-             npm run build
+            cd backend
+            npm install
+            npm run build
       - save_cache:
           paths: [backend/node_modules]
           key: backend-deps
 
-   test-frontend:
-     docker:
-       - image: cimg/node:13.8.0
-     steps:
+  test-frontend:
+    docker:
+      - image: cimg/node:13.8.0
+    steps:
       - checkout
       - restore_cache:
           keys: [frontend-deps]
       - run:
-          name: frontend test
+          name: Front-end Unit Test
           command: |
-             cd frontend
-             npm install
-             npm test
+            cd frontend
+            npm install
+            npm test
 
-   test-backend:
-     docker:
-       - image: cimg/node:13.8.0
-     steps:
+  test-backend:
+    docker:
+      - image: cimg/node:13.8.0
+    steps:
       - checkout
       - restore_cache:
           keys: [backend-deps]
       - run:
-          name: backend test
+          name: Back-end Unit Test
           command: |
-             cd backend
-             npm install
-             npm test
+            cd backend
+            npm install
+            npm test
 #     docker:
 #       Docker image here
 #     steps:
